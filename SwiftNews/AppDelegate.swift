@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         
-        var mainNC = MainNavController()
+        let mainNC = MainNavController()
         window?.rootViewController = mainNC
         
         window?.backgroundColor = UIColor.white
