@@ -16,6 +16,7 @@ class MainViewController : BaseViewController, UITableViewDelegate, UITableViewD
     private static let titleString = "Swift News"
     private static let loadingNewsCaption = "Loading News"
     private static let loadingArticleCaption = "Loading Article"
+    private static let reloadNewsCaption = "Reload"
     
     private var tableView: NewsTableView!
     private var articles: [ArticleEntity]!
@@ -26,6 +27,8 @@ class MainViewController : BaseViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: MainViewController.reloadNewsCaption, style: .plain, target: self, action: #selector(softRefreshNews))
         
         title = MainViewController.titleString
         
@@ -66,7 +69,7 @@ class MainViewController : BaseViewController, UITableViewDelegate, UITableViewD
         softRefreshNews()
     }
     
-    private func softRefreshNews() {
+    @objc private func softRefreshNews() {
         if (currentArticleService == nil) {
             updateLoadingSpinnerStatus(shouldShow: true, caption: MainViewController.loadingNewsCaption)
             
