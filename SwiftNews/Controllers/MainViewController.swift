@@ -16,6 +16,7 @@ class MainViewController : BaseViewController, UITableViewDelegate, UITableViewD
     
     private var tableView: ArticleTableView!
     private var articles: [ArticleEntity]!
+    private var currentArticleService: ArticleService?
     private var newsUpdateTime: Date?
     
     override func viewDidLoad() {
@@ -39,18 +40,38 @@ class MainViewController : BaseViewController, UITableViewDelegate, UITableViewD
     
     override func viewWillAppear(_ animated: Bool) {
         if (newsUpdateTime == nil) {
-            refreshNews()
+            softRefreshNews()
         }
     }
     
-    func updateWithArticles(newArticles: [ArticleEntity]) {
-        articles = newArticles
+    func updateWithArticles(newArticles: [ArticleEntity]?) {
+        articles = newArticles ?? [ArticleEntity]()
         newsUpdateTime = Date()
         tableView.reloadData()
     }
     
-    private func refreshNews() {
-    	// TODO
+    private func hardRefreshNews() {
+        invalidateArticleService()
+        
+        softRefreshNews()
+    }
+    
+    private func softRefreshNews() {
+        if (currentArticleService == nil) {
+            currentArticleService = ArticleService.fetchNews(completionHandler: { [weak self] (service, articles, error) in
+                if service === self?.currentArticleService {
+                    self?.invalidateArticleService()
+                    if error != nil {
+                        self?.updateWithArticles(newArticles: articles)
+                    }
+                }
+            })
+        }
+    }
+    
+    private func invalidateArticleService() {
+        currentArticleService?.invalidate();
+        currentArticleService = nil
     }
     
     // MARK: ArticleTableView's UITableViewDataSource
