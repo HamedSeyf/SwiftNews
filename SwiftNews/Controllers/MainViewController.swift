@@ -18,6 +18,7 @@ class MainViewController : BaseViewController, UITableViewDelegate, UITableViewD
     private var articles: [ArticleEntity]!
     private var currentArticleService: ArticleService?
     private var newsUpdateTime: Date?
+    private weak var currentArticleNC: ArticleNavController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -104,7 +105,16 @@ class MainViewController : BaseViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        if currentArticleNC == nil {
+            let newArticleNC = ArticleNavController(articleObject: articles[indexPath.row])
+            newArticleNC.mainArticleVC.dismissCallback = { [weak self] (toBeDismissedVC: BaseViewController) in
+                self?.currentArticleNC = nil
+            }
+            currentArticleNC = newArticleNC
+            
+            newArticleNC.modalPresentationStyle = .popover
+            present(newArticleNC, animated: true, completion: nil)
+        }
     }
-
+    
 }

@@ -9,10 +9,13 @@
 import UIKit
 
 class BaseViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+    
+    var dismissCallback: ((_ toBeDismissedVC: BaseViewController) -> Void)?
+    
+    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
+        dismissCallback?(self)
+        
+        super.dismiss(animated: flag, completion: completion)
     }
 
 }
