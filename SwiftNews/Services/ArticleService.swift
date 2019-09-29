@@ -15,6 +15,7 @@ class ArticleService: BaseService {
     
     private static let newsURL = "https://www.reddit.com/r/swift/.json"
     private static let successStatusCodes = [200]
+    private static let requestTimeOutInterval: TimeInterval = 10
     
     private var dataRequest: DataRequest?
     
@@ -22,7 +23,10 @@ class ArticleService: BaseService {
         let service = ArticleService()
         weak var weakService = service
         
-        service.dataRequest = Alamofire.request(newsURL, method: .get, parameters: nil, encoding: JSONEncoding.default)
+        let manager = Alamofire.SessionManager.default
+        manager.session.configuration.timeoutIntervalForRequest = requestTimeOutInterval
+        
+        service.dataRequest = manager.request(newsURL, method: .get, parameters: nil, encoding: JSONEncoding.default)
             .responseJSON { response in
                 
                 if let status = response.response?.statusCode,
@@ -31,7 +35,9 @@ class ArticleService: BaseService {
                     successStatusCodes.contains(status) {
                     completionHandler(weakService, newsEntity, nil)
                 } else {
-                    completionHandler(weakService, nil, NSError(domain:errorDomain, code:response.response?.statusCode ?? defaultErrorCode, userInfo: nil))
+                    let error = response.result.error ?? NSError(domain:errorDomain, code:response.response?.statusCode ?? defaultErrorCode, userInfo: nil)
+                    print("fetchNews returned with error: ", error.localizedDescription)
+                    completionHandler(weakService, nil, error)
                 }
         }
         

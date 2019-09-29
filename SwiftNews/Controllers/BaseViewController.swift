@@ -17,5 +17,17 @@ class BaseViewController: UIViewController {
         
         super.dismiss(animated: flag, completion: completion)
     }
+    
+    func showAlert(title: String?, message: String?, options: [String], dismissCallback: @escaping (_ : Int) -> Void) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        for currentOption in options {
+            alertVC.addAction(
+                UIAlertAction(title: currentOption, style: .default) { (action) in
+                    dismissCallback(options.firstIndex(of: currentOption)!)
+                }
+            )
+        }
+        present(alertVC, animated: true, completion: nil)
+    }
 
 }

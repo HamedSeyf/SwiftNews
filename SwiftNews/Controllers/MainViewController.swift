@@ -64,6 +64,12 @@ class MainViewController : BaseViewController, UITableViewDelegate, UITableViewD
                     self?.invalidateArticleService()
                     if error == nil {
                         self?.updateWithArticles(newArticles: newsEntity?.articles)
+                    } else {
+                        self?.showAlert(title: "Oooops!", message: "Something went wrong trying to load the news.\nPlease try again later.", options: ["Ok", "Retry"], dismissCallback: { (userPrompt: Int) in
+                            if userPrompt == 1 {
+                                self?.softRefreshNews()
+                            }
+                        })
                     }
                 }
             })
