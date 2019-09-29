@@ -12,6 +12,7 @@ import UIKit
 class ArticleViewController : BaseViewController {
     
     private(set) var article: ArticleEntity?
+    private var articleView: ArticleView!
     
     required init(articleObject: ArticleEntity) {
         super.init(nibName: nil, bundle: nil)
@@ -19,7 +20,8 @@ class ArticleViewController : BaseViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(dismissPressed))
         navigationItem.title = articleObject.title
         
-        setArticle(articleObject: articleObject)
+        articleView = ArticleView()
+        article = articleObject
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -30,10 +32,17 @@ class ArticleViewController : BaseViewController {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.white
-    }
-    
-    private func setArticle(articleObject: ArticleEntity) {
-        article = articleObject
+     	
+        view.addSubview(articleView)
+        articleView.translatesAutoresizingMaskIntoConstraints = false
+        articleView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        articleView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+        articleView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        articleView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        if let htmlBody = article?.htmlBody {
+            articleView.loadHTMLString(htmlBody, baseURL: nil)
+        }
     }
     
     @objc private func dismissPressed() {

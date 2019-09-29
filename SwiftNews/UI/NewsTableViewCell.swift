@@ -9,7 +9,7 @@
 import UIKit
 import PINRemoteImage
 
-class ArticleTableViewCell : UITableViewCell {
+class NewsTableViewCell : UITableViewCell {
     
     private var titleLabel: UILabel!
     private var articleImageView: UIImageView!
@@ -25,7 +25,7 @@ class ArticleTableViewCell : UITableViewCell {
         selectionStyle = .none
         
         titleLabel = UILabel()
-        titleLabel.font = ArticleTableViewCell.titleFont()
+        titleLabel.font = NewsTableViewCell.titleFont()
         titleLabel.textAlignment = .left
         titleLabel.lineBreakMode = .byWordWrapping
         titleLabel.numberOfLines = 0
@@ -59,11 +59,11 @@ class ArticleTableViewCell : UITableViewCell {
         }
         
         if article.imageURL() != nil {
-            let topGap = (retVal == 0.0) ? ArticleTableViewCell.verticalMargins : ArticleTableViewCell.verticalGap
+            let topGap = (retVal == 0.0) ? NewsTableViewCell.verticalMargins : NewsTableViewCell.verticalGap
             retVal += (topGap + article.imageHeightForWidth(width: effectiveWidth))
         }
         
-        retVal += ArticleTableViewCell.verticalMargins
+        retVal += NewsTableViewCell.verticalMargins
         
         return retVal
     }
@@ -82,15 +82,15 @@ class ArticleTableViewCell : UITableViewCell {
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: ArticleTableViewCell.verticalMargins).isActive = true
-        titleLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: (-2.0 * ArticleTableViewCell.sideMargins)).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: NewsTableViewCell.verticalMargins).isActive = true
+        titleLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: (-2.0 * NewsTableViewCell.sideMargins)).isActive = true
         
         articleImageView.translatesAutoresizingMaskIntoConstraints = false
         articleImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        articleImageView.widthAnchor.constraint(equalTo: widthAnchor, constant: (-2.0 * ArticleTableViewCell.sideMargins)).isActive = true
+        articleImageView.widthAnchor.constraint(equalTo: widthAnchor, constant: (-2.0 * NewsTableViewCell.sideMargins)).isActive = true
         articleImageView.topAnchor.constraint(
             equalTo: (article.hasValidTitle() ? titleLabel.bottomAnchor : topAnchor),
-            constant: (article.hasValidTitle() ? ArticleTableViewCell.verticalGap : ArticleTableViewCell.verticalMargins))
+            constant: (article.hasValidTitle() ? NewsTableViewCell.verticalGap : NewsTableViewCell.verticalMargins))
             .isActive = true
         articleImageView.heightAnchor.constraint(equalTo: articleImageView.widthAnchor, multiplier: (article.imageHeightToWidthRatio() ?? 0.0)).isActive = true
         
@@ -98,7 +98,7 @@ class ArticleTableViewCell : UITableViewCell {
     }
     
     private static func titleFont() -> UIFont {
-        return UIFont.systemFont(ofSize: ArticleTableViewCell.titleFontSize)
+        return UIFont.systemFont(ofSize: NewsTableViewCell.titleFontSize)
     }
     
 }

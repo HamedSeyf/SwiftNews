@@ -14,7 +14,7 @@ class MainViewController : BaseViewController, UITableViewDelegate, UITableViewD
     private let articleCellsIdentifier = "SwiftNews_CellReuseIdentifier_Article"
     private let titleString = "Swift News"
     
-    private var tableView: ArticleTableView!
+    private var tableView: NewsTableView!
     private var articles: [ArticleEntity]!
     private var currentArticleService: ArticleService?
     private var newsUpdateTime: Date?
@@ -27,8 +27,8 @@ class MainViewController : BaseViewController, UITableViewDelegate, UITableViewD
         
         articles = [ArticleEntity]()
         
-        tableView = ArticleTableView(frame: CGRect.zero, style: .plain)
-        tableView.register(ArticleTableViewCell.self, forCellReuseIdentifier: articleCellsIdentifier)
+        tableView = NewsTableView(frame: CGRect.zero, style: .plain)
+        tableView.register(NewsTableViewCell.self, forCellReuseIdentifier: articleCellsIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
@@ -75,22 +75,22 @@ class MainViewController : BaseViewController, UITableViewDelegate, UITableViewD
         currentArticleService = nil
     }
     
-    // MARK: ArticleTableView's UITableViewDataSource
+    // MARK: NewsTableView's UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articles.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var retVal: ArticleTableViewCell?
+        var retVal: NewsTableViewCell?
         
         let rawCell = tableView.dequeueReusableCell(withIdentifier: articleCellsIdentifier)
         
-        if let typedCell = rawCell as? ArticleTableViewCell {
+        if let typedCell = rawCell as? NewsTableViewCell {
             typedCell.updateWithArticle(article: articles[indexPath.row])
             retVal = typedCell
         } else {
-            retVal = ArticleTableViewCell()
+            retVal = NewsTableViewCell()
         }
         
         assert(rawCell != nil, "Something went wrong trying to recover a reusable article cell!")
@@ -98,10 +98,10 @@ class MainViewController : BaseViewController, UITableViewDelegate, UITableViewD
         return retVal!
     }
     
-    // MARK: ArticleTableView's UITableViewDelegate
+    // MARK: NewsTableView's UITableViewDelegate
 	
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return ArticleTableViewCell.estimatedHeight(tableView: tableView, article: articles[indexPath.row])
+        return NewsTableViewCell.estimatedHeight(tableView: tableView, article: articles[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

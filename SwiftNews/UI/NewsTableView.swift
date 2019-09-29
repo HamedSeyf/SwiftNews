@@ -1,5 +1,5 @@
 //
-//  ArticleTableView.swift
+//  NewsTableView.swift
 //  SwiftNews
 //
 //  Created by Hamed Seyf on 9/28/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ArticleTableView : UITableView {
+class NewsTableView : UITableView {
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)

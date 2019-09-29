@@ -12,11 +12,12 @@
 		0995B89A23411AE500B51693 /* NewsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0995B89923411AE500B51693 /* NewsEntity.swift */; };
 		0995B89C234134A300B51693 /* ArticleNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0995B89B234134A300B51693 /* ArticleNavController.swift */; };
 		0995B89E234134BD00B51693 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0995B89D234134BD00B51693 /* ArticleViewController.swift */; };
+		099C808B234155F00041EB2D /* ArticleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099C808A234155F00041EB2D /* ArticleView.swift */; };
 		09B49D05233FB8C7008DA551 /* BaseNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B49D04233FB8C7008DA551 /* BaseNavController.swift */; };
 		09B49D08233FB9D8008DA551 /* MainNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B49D07233FB9D8008DA551 /* MainNavController.swift */; };
 		09B49D0A233FBEA4008DA551 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B49D09233FBEA4008DA551 /* MainViewController.swift */; };
-		09B49D0C233FD305008DA551 /* ArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B49D0B233FD305008DA551 /* ArticleTableViewCell.swift */; };
-		09B49D0E233FD339008DA551 /* ArticleTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B49D0D233FD339008DA551 /* ArticleTableView.swift */; };
+		09B49D0C233FD305008DA551 /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B49D0B233FD305008DA551 /* NewsTableViewCell.swift */; };
+		09B49D0E233FD339008DA551 /* NewsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B49D0D233FD339008DA551 /* NewsTableView.swift */; };
 		09B49D13234067E5008DA551 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B49D12234067E5008DA551 /* Extensions.swift */; };
 		09CE96C42340FA02003904D1 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CE96C32340FA02003904D1 /* BaseService.swift */; };
 		09CE96C62340FA14003904D1 /* ArticleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CE96C52340FA14003904D1 /* ArticleService.swift */; };
@@ -33,11 +34,12 @@
 		0995B89923411AE500B51693 /* NewsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsEntity.swift; sourceTree = "<group>"; };
 		0995B89B234134A300B51693 /* ArticleNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleNavController.swift; sourceTree = "<group>"; };
 		0995B89D234134BD00B51693 /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
+		099C808A234155F00041EB2D /* ArticleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleView.swift; sourceTree = "<group>"; };
 		09B49D04233FB8C7008DA551 /* BaseNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavController.swift; sourceTree = "<group>"; };
 		09B49D07233FB9D8008DA551 /* MainNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavController.swift; sourceTree = "<group>"; };
 		09B49D09233FBEA4008DA551 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		09B49D0B233FD305008DA551 /* ArticleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTableViewCell.swift; sourceTree = "<group>"; };
-		09B49D0D233FD339008DA551 /* ArticleTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleTableView.swift; sourceTree = "<group>"; };
+		09B49D0B233FD305008DA551 /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
+		09B49D0D233FD339008DA551 /* NewsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableView.swift; sourceTree = "<group>"; };
 		09B49D12234067E5008DA551 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		09CE96C32340FA02003904D1 /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
 		09CE96C52340FA14003904D1 /* ArticleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleService.swift; sourceTree = "<group>"; };
@@ -68,8 +70,9 @@
 			isa = PBXGroup;
 			children = (
 				09E7C88F233FB381004B9CCD /* LaunchScreen.storyboard */,
-				09B49D0B233FD305008DA551 /* ArticleTableViewCell.swift */,
-				09B49D0D233FD339008DA551 /* ArticleTableView.swift */,
+				09B49D0B233FD305008DA551 /* NewsTableViewCell.swift */,
+				09B49D0D233FD339008DA551 /* NewsTableView.swift */,
+				099C808A234155F00041EB2D /* ArticleView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -286,7 +289,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09B49D0E233FD339008DA551 /* ArticleTableView.swift in Sources */,
+				09B49D0E233FD339008DA551 /* NewsTableView.swift in Sources */,
 				0995B89A23411AE500B51693 /* NewsEntity.swift in Sources */,
 				0995B89C234134A300B51693 /* ArticleNavController.swift in Sources */,
 				09B49D13234067E5008DA551 /* Extensions.swift in Sources */,
@@ -296,7 +299,8 @@
 				0995B89E234134BD00B51693 /* ArticleViewController.swift in Sources */,
 				0995B898234115EA00B51693 /* ArticleEntity.swift in Sources */,
 				09B49D0A233FBEA4008DA551 /* MainViewController.swift in Sources */,
-				09B49D0C233FD305008DA551 /* ArticleTableViewCell.swift in Sources */,
+				09B49D0C233FD305008DA551 /* NewsTableViewCell.swift in Sources */,
+				099C808B234155F00041EB2D /* ArticleView.swift in Sources */,
 				0995B896234115C100B51693 /* BaseEntity.swift in Sources */,
 				09CE96C42340FA02003904D1 /* BaseService.swift in Sources */,
 				09CE96C62340FA14003904D1 /* ArticleService.swift in Sources */,

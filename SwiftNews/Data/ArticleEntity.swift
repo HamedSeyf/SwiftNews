@@ -17,6 +17,7 @@ class ArticleEntity : BaseEntity {
     @objc dynamic var imageAddress: String?
     @objc dynamic var imageWidth: NSNumber = 0.0
     @objc dynamic var imageHeight: NSNumber = 0.0
+    @objc dynamic var htmlBody: String?
     
     override func mapping(map: Map) {
         super.mapping(map: map)
@@ -25,6 +26,7 @@ class ArticleEntity : BaseEntity {
         imageAddress <- map["data.thumbnail"]
         imageWidth <- map["data.thumbnail_width"]
         imageHeight <- map["data.thumbnail_height"]
+        htmlBody <- map["data.selftext_html"]
     }
     
     // MARK: Helper functions
