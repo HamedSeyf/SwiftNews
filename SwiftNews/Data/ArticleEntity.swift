@@ -14,7 +14,7 @@ class ArticleEntity : BaseEntity {
     private static let unAcceptableImageURLs = ["self"]
     
     @objc dynamic var title: String?
-    @objc dynamic var imageURL: String?
+    @objc dynamic var imageAddress: String?
     @objc dynamic var imageWidth: NSNumber = 0.0
     @objc dynamic var imageHeight: NSNumber = 0.0
     
@@ -22,7 +22,7 @@ class ArticleEntity : BaseEntity {
         super.mapping(map: map)
         
         title <- map["data.title"]
-        imageURL <- map["data.thumbnail"]
+        imageAddress <- map["data.thumbnail"]
         imageWidth <- map["data.thumbnail_width"]
         imageHeight <- map["data.thumbnail_height"]
     }
@@ -33,15 +33,24 @@ class ArticleEntity : BaseEntity {
         return (title != nil) && (title!.count > 0)
     }
     
-    func imageURLIsValid() -> Bool {
-        return (imageURL != nil) && (imageURL!.count > 0) &&
-            (imageWidth.intValue > 0) &&
-            (imageHeight.intValue > 0) &&
-            (!ArticleEntity.unAcceptableImageURLs.contains(imageURL!))
+    func imageURL() -> URL? {
+        var retVal: URL? = nil
+        
+        if let validImageAddress = imageAddress {
+            if (validImageAddress.count > 0) &&
+                (imageWidth.intValue > 0) &&
+                (imageHeight.intValue > 0) &&
+                (!ArticleEntity.unAcceptableImageURLs.contains(validImageAddress)) {
+                
+                retVal = URL(string: validImageAddress)
+            }
+        }
+        
+        return retVal
     }
     
     func imageHeightToWidthRatio() -> CGFloat? {
-        return imageURLIsValid() ? CGFloat(imageHeight.floatValue / imageWidth.floatValue) : nil
+        return (imageURL() != nil) ? CGFloat(imageHeight.floatValue / imageWidth.floatValue) : nil
     }
     
     func imageHeightForWidth(width: CGFloat) -> CGFloat {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PINRemoteImage
 
 class ArticleTableViewCell : UITableViewCell {
     
@@ -39,7 +40,7 @@ class ArticleTableViewCell : UITableViewCell {
     }
     
     override func prepareForReuse() {
-        // TODO: Setting image URL to nil just in case it's still loading
+        articleImageView.pin_setImage(from: URL(string: ""))
     }
     
     override func sizeToFit() {
@@ -57,7 +58,7 @@ class ArticleTableViewCell : UITableViewCell {
             retVal += (verticalMargins + article.title!.height(withConstrainedWidth: effectiveWidth, font: titleFont()))
         }
         
-        if article.imageURLIsValid() {
+        if article.imageURL() != nil {
             let topGap = (retVal == 0.0) ? ArticleTableViewCell.verticalMargins : ArticleTableViewCell.verticalGap
             retVal += (topGap + article.imageHeightForWidth(width: effectiveWidth))
         }
@@ -70,15 +71,14 @@ class ArticleTableViewCell : UITableViewCell {
     func updateWithArticle(article: ArticleEntity) {
         titleLabel.text = article.title
         
-        // TODO: Passing up the image URL here
-        assert(true, "articleImageView has a valid URL already. Make sure cell is reused properly or call updateWithArticle just once.")
+        articleImageView?.pin_setImage(from: article.imageURL())
         
         updateUI(article: article)
     }
     
     private func updateUI(article: ArticleEntity) {
         titleLabel.isHidden = !article.hasValidTitle()
-        articleImageView.isHidden = !article.imageURLIsValid()
+        articleImageView.isHidden = (article.imageURL() == nil)
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
