@@ -3,6 +3,7 @@ PODS:
   - AlamofireObjectMapper (5.2.1):
     - Alamofire (~> 4.7)
     - ObjectMapper (~> 3.4)
+  - MBProgressHUD (1.1.0)
   - ObjectMapper (3.5.1)
   - PINCache (3.0.1-beta.7):
     - PINCache/Arc-exception-safe (= 3.0.1-beta.7)
@@ -29,6 +30,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.7)
   - AlamofireObjectMapper (~> 5.2)
+  - MBProgressHUD (~> 1.1.0)
   - PINRemoteImage (~> 3.0.0-beta)
   - RealmSwift
   - SwiftyJSON (~> 4.0)
@@ -37,6 +39,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - AlamofireObjectMapper
+    - MBProgressHUD
     - ObjectMapper
     - PINCache
     - PINOperation
@@ -48,6 +51,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: afc3e7c6db61476cb45cdd23fed06bad03bbc321
   AlamofireObjectMapper: 1989f690e982b71921b9253f53a4f33a9bc00d88
+  MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   ObjectMapper: 70187b8941977c62ccfb423caf6b50be405cabf0
   PINCache: 7cb9ae068c8f655717f7c644ef1dff9fd573e979
   PINOperation: 24b774353ca248fcf87d67b2d61eef42087c125a
@@ -56,6 +60,6 @@ SPEC CHECKSUMS:
   RealmSwift: 35f284a537989f2187b413e5917091948cb87a3f
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: d7ef62e6b1cf645682f7f9502660b8644e41869f
+PODFILE CHECKSUM: f584d39c2ce32dab392153c1acc6654aa39c7b99
 
 COCOAPODS: 1.8.1

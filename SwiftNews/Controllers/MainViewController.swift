@@ -8,27 +8,31 @@
 
 import CoreData
 import UIKit
+import MBProgressHUD
 
 class MainViewController : BaseViewController, UITableViewDelegate, UITableViewDataSource {
     
-    private let articleCellsIdentifier = "SwiftNews_CellReuseIdentifier_Article"
-    private let titleString = "Swift News"
+    private static let articleCellsIdentifier = "SwiftNews_CellReuseIdentifier_Article"
+    private static let titleString = "Swift News"
+    private static let loadingNewsCaption = "Loading News"
+    private static let loadingArticleCaption = "Loading Article"
     
     private var tableView: NewsTableView!
     private var articles: [ArticleEntity]!
     private var currentArticleService: ArticleService?
     private var newsUpdateTime: Date?
     private weak var currentArticleNC: ArticleNavController?
+    private var progressBar: MBProgressHUD!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = titleString
+        title = MainViewController.titleString
         
         articles = [ArticleEntity]()
         
         tableView = NewsTableView(frame: CGRect.zero, style: .plain)
-        tableView.register(NewsTableViewCell.self, forCellReuseIdentifier: articleCellsIdentifier)
+        tableView.register(NewsTableViewCell.self, forCellReuseIdentifier: MainViewController.articleCellsIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
@@ -37,6 +41,11 @@ class MainViewController : BaseViewController, UITableViewDelegate, UITableViewD
         tableView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         tableView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         tableView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+        
+        progressBar = MBProgressHUD(view: view)
+        progressBar.mode = .indeterminate
+        view.addSubview(progressBar)
+        progressBar.hide(animated: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,9 +68,13 @@ class MainViewController : BaseViewController, UITableViewDelegate, UITableViewD
     
     private func softRefreshNews() {
         if (currentArticleService == nil) {
+            updateLoadingSpinnerStatus(shouldShow: true, caption: MainViewController.loadingNewsCaption)
+            
             currentArticleService = ArticleService.fetchNews(completionHandler: { [weak self] (service, newsEntity, error) in
                 if service === self?.currentArticleService {
+                    self?.updateLoadingSpinnerStatus(shouldShow: false)
                     self?.invalidateArticleService()
+                    
                     if error == nil {
                         self?.updateWithArticles(newArticles: newsEntity?.articles)
                     } else {
@@ -73,6 +86,15 @@ class MainViewController : BaseViewController, UITableViewDelegate, UITableViewD
                     }
                 }
             })
+        }
+    }
+    
+    private func updateLoadingSpinnerStatus(shouldShow: Bool, caption: String? = nil) {
+        if shouldShow {
+            progressBar.label.text = caption
+            progressBar.show(animated: true)
+        } else {
+            progressBar.hide(animated: true)
         }
     }
     
@@ -90,7 +112,7 @@ class MainViewController : BaseViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var retVal: NewsTableViewCell?
         
-        let rawCell = tableView.dequeueReusableCell(withIdentifier: articleCellsIdentifier)
+        let rawCell = tableView.dequeueReusableCell(withIdentifier: MainViewController.articleCellsIdentifier)
         
         if let typedCell = rawCell as? NewsTableViewCell {
             typedCell.updateWithArticle(article: articles[indexPath.row])
@@ -112,6 +134,8 @@ class MainViewController : BaseViewController, UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if currentArticleNC == nil {
+            updateLoadingSpinnerStatus(shouldShow: true, caption: MainViewController.loadingArticleCaption)
+            
             let newArticleNC = ArticleNavController(articleObject: articles[indexPath.row])
             newArticleNC.mainArticleVC.dismissCallback = { [weak self] (toBeDismissedVC: BaseViewController) in
                 self?.currentArticleNC = nil
@@ -119,7 +143,9 @@ class MainViewController : BaseViewController, UITableViewDelegate, UITableViewD
             currentArticleNC = newArticleNC
             
             newArticleNC.modalPresentationStyle = .popover
-            present(newArticleNC, animated: true, completion: nil)
+            present(newArticleNC, animated: true, completion: { [weak self] in
+                self?.updateLoadingSpinnerStatus(shouldShow: false)
+            })
         }
     }
     

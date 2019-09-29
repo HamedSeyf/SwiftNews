@@ -15,4 +15,6 @@ target 'SwiftNews' do
 
   pod 'RealmSwift'
 
+  pod 'MBProgressHUD', '~> 1.1.0'
+
 end
