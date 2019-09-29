@@ -8,14 +8,17 @@
 
 import Foundation
 import Alamofire
+import AlamofireObjectMapper
+import ObjectMapper
 
 class ArticleService: BaseService {
     
     private static let newsURL = "https://www.reddit.com/r/swift/.json"
+    private static let successStatusCodes = [200]
     
     private var dataRequest: DataRequest?
     
-    static func fetchNews(completionHandler: @escaping (ArticleService?, [ArticleEntity]?, Error?) -> Void) -> ArticleService {
+    static func fetchNews(completionHandler: @escaping (ArticleService?, NewsEntity?, Error?) -> Void) -> ArticleService {
         let service = ArticleService()
         weak var weakService = service
         
@@ -23,9 +26,10 @@ class ArticleService: BaseService {
             .responseJSON { response in
                 
                 if let status = response.response?.statusCode,
-                    status == 200 {
-                    // TODO: parsing the output
-                    completionHandler(weakService, nil, nil)
+                    let newsResponse = response.result.value,
+                    let newsEntity = Mapper<NewsEntity>().map(JSONObject: newsResponse),
+                    successStatusCodes.contains(status) {
+                    completionHandler(weakService, newsEntity, nil)
                 } else {
                     completionHandler(weakService, nil, NSError(domain:errorDomain, code:response.response?.statusCode ?? defaultErrorCode, userInfo: nil))
                 }

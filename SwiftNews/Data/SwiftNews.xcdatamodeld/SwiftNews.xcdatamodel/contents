@@ -6,7 +6,9 @@
         <attribute name="imageWidth" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="BaseEntity" representedClassName="BaseEntity" isAbstract="YES" syncable="YES" codeGenerationType="class"/>
     <elements>
         <element name="ArticleEntity" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="BaseEntity" positionX="-63" positionY="9" width="128" height="45"/>
     </elements>
 </model>

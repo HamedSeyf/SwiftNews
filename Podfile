@@ -13,4 +13,6 @@ target 'SwiftNews' do
 
   pod 'PINRemoteImage', '~> 3.0.0-beta'
 
+  pod 'RealmSwift'
+
 end

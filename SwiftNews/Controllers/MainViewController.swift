@@ -58,11 +58,11 @@ class MainViewController : BaseViewController, UITableViewDelegate, UITableViewD
     
     private func softRefreshNews() {
         if (currentArticleService == nil) {
-            currentArticleService = ArticleService.fetchNews(completionHandler: { [weak self] (service, articles, error) in
+            currentArticleService = ArticleService.fetchNews(completionHandler: { [weak self] (service, newsEntity, error) in
                 if service === self?.currentArticleService {
                     self?.invalidateArticleService()
-                    if error != nil {
-                        self?.updateWithArticles(newArticles: articles)
+                    if error == nil {
+                        self?.updateWithArticles(newArticles: newsEntity?.articles)
                     }
                 }
             })
@@ -70,7 +70,7 @@ class MainViewController : BaseViewController, UITableViewDelegate, UITableViewD
     }
     
     private func invalidateArticleService() {
-        currentArticleService?.invalidate();
+        currentArticleService?.invalidate()
         currentArticleService = nil
     }
     

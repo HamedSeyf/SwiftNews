@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0995B896234115C100B51693 /* BaseEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0995B895234115C100B51693 /* BaseEntity.swift */; };
+		0995B898234115EA00B51693 /* ArticleEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0995B897234115EA00B51693 /* ArticleEntity.swift */; };
+		0995B89A23411AE500B51693 /* NewsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0995B89923411AE500B51693 /* NewsEntity.swift */; };
 		09B49D05233FB8C7008DA551 /* BaseNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B49D04233FB8C7008DA551 /* BaseNavController.swift */; };
 		09B49D08233FB9D8008DA551 /* MainNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B49D07233FB9D8008DA551 /* MainNavController.swift */; };
 		09B49D0A233FBEA4008DA551 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B49D09233FBEA4008DA551 /* MainViewController.swift */; };
@@ -17,13 +20,15 @@
 		09CE96C62340FA14003904D1 /* ArticleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09CE96C52340FA14003904D1 /* ArticleService.swift */; };
 		09E7C884233FB380004B9CCD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7C883233FB380004B9CCD /* AppDelegate.swift */; };
 		09E7C886233FB380004B9CCD /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E7C885233FB380004B9CCD /* BaseViewController.swift */; };
-		09E7C88C233FB380004B9CCD /* SwiftNews.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 09E7C88A233FB380004B9CCD /* SwiftNews.xcdatamodeld */; };
 		09E7C88E233FB381004B9CCD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09E7C88D233FB381004B9CCD /* Assets.xcassets */; };
 		09E7C891233FB381004B9CCD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09E7C88F233FB381004B9CCD /* LaunchScreen.storyboard */; };
 		D6B284713687B45E9DA2AB90 /* Pods_SwiftNews.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C28C7A6BA18309ABF89166B9 /* Pods_SwiftNews.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0995B895234115C100B51693 /* BaseEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEntity.swift; sourceTree = "<group>"; };
+		0995B897234115EA00B51693 /* ArticleEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleEntity.swift; sourceTree = "<group>"; };
+		0995B89923411AE500B51693 /* NewsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsEntity.swift; sourceTree = "<group>"; };
 		09B49D04233FB8C7008DA551 /* BaseNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavController.swift; sourceTree = "<group>"; };
 		09B49D07233FB9D8008DA551 /* MainNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavController.swift; sourceTree = "<group>"; };
 		09B49D09233FBEA4008DA551 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -35,7 +40,6 @@
 		09E7C880233FB380004B9CCD /* SwiftNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09E7C883233FB380004B9CCD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09E7C885233FB380004B9CCD /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		09E7C88B233FB380004B9CCD /* SwiftNews.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwiftNews.xcdatamodel; sourceTree = "<group>"; };
 		09E7C88D233FB381004B9CCD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		09E7C890233FB381004B9CCD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		09E7C892233FB381004B9CCD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -80,7 +84,9 @@
 		09B49D02233FB771008DA551 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				09E7C88A233FB380004B9CCD /* SwiftNews.xcdatamodeld */,
+				0995B895234115C100B51693 /* BaseEntity.swift */,
+				0995B897234115EA00B51693 /* ArticleEntity.swift */,
+				0995B89923411AE500B51693 /* NewsEntity.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -275,13 +281,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				09B49D0E233FD339008DA551 /* ArticleTableView.swift in Sources */,
+				0995B89A23411AE500B51693 /* NewsEntity.swift in Sources */,
 				09B49D13234067E5008DA551 /* Extensions.swift in Sources */,
 				09B49D08233FB9D8008DA551 /* MainNavController.swift in Sources */,
 				09E7C886233FB380004B9CCD /* BaseViewController.swift in Sources */,
 				09B49D05233FB8C7008DA551 /* BaseNavController.swift in Sources */,
+				0995B898234115EA00B51693 /* ArticleEntity.swift in Sources */,
 				09B49D0A233FBEA4008DA551 /* MainViewController.swift in Sources */,
 				09B49D0C233FD305008DA551 /* ArticleTableViewCell.swift in Sources */,
-				09E7C88C233FB380004B9CCD /* SwiftNews.xcdatamodeld in Sources */,
+				0995B896234115C100B51693 /* BaseEntity.swift in Sources */,
 				09CE96C42340FA02003904D1 /* BaseService.swift in Sources */,
 				09CE96C62340FA14003904D1 /* ArticleService.swift in Sources */,
 				09E7C884233FB380004B9CCD /* AppDelegate.swift in Sources */,
@@ -476,19 +484,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		09E7C88A233FB380004B9CCD /* SwiftNews.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				09E7C88B233FB380004B9CCD /* SwiftNews.xcdatamodel */,
-			);
-			currentVersion = 09E7C88B233FB380004B9CCD /* SwiftNews.xcdatamodel */;
-			path = SwiftNews.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 09E7C878233FB380004B9CCD /* Project object */;
 }

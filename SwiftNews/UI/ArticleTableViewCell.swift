@@ -53,13 +53,13 @@ class ArticleTableViewCell : UITableViewCell {
         var retVal: CGFloat = 0.0
         let effectiveWidth = tableView.frame.width - 2.0 * sideMargins
         
-        if ArticleTableViewCell.articleHasValidTitle(article: article) {
+        if article.hasValidTitle() {
             retVal += (verticalMargins + article.title!.height(withConstrainedWidth: effectiveWidth, font: titleFont()))
         }
         
-        if ArticleTableViewCell.imageURLIsValid(article: article) {
+        if article.imageURLIsValid() {
             let topGap = (retVal == 0.0) ? ArticleTableViewCell.verticalMargins : ArticleTableViewCell.verticalGap
-            retVal += (topGap + ArticleTableViewCell.imageHeight(article: article, width: effectiveWidth))
+            retVal += (topGap + article.imageHeightForWidth(width: effectiveWidth))
         }
         
         retVal += ArticleTableViewCell.verticalMargins
@@ -77,11 +77,8 @@ class ArticleTableViewCell : UITableViewCell {
     }
     
     private func updateUI(article: ArticleEntity) {
-        titleLabel.isHidden = !ArticleTableViewCell.articleHasValidTitle(article: article)
-        articleImageView.isHidden = !ArticleTableViewCell.imageURLIsValid(article: article)
-        
-        // TODO: get the correct value from the entity
-        let imageWidthToHeight: CGFloat = 1.5
+        titleLabel.isHidden = !article.hasValidTitle()
+        articleImageView.isHidden = !article.imageURLIsValid()
         
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
@@ -92,38 +89,16 @@ class ArticleTableViewCell : UITableViewCell {
         articleImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         articleImageView.widthAnchor.constraint(equalTo: widthAnchor, constant: (-2.0 * ArticleTableViewCell.sideMargins)).isActive = true
         articleImageView.topAnchor.constraint(
-            equalTo: (ArticleTableViewCell.articleHasValidTitle(article: article) ? titleLabel.bottomAnchor : topAnchor),
-            constant: (ArticleTableViewCell.articleHasValidTitle(article: article) ? ArticleTableViewCell.verticalGap : ArticleTableViewCell.verticalMargins))
+            equalTo: (article.hasValidTitle() ? titleLabel.bottomAnchor : topAnchor),
+            constant: (article.hasValidTitle() ? ArticleTableViewCell.verticalGap : ArticleTableViewCell.verticalMargins))
             .isActive = true
-        articleImageView.heightAnchor.constraint(equalTo: articleImageView.widthAnchor, multiplier: (1.0 / imageWidthToHeight)).isActive = true
+        articleImageView.heightAnchor.constraint(equalTo: articleImageView.widthAnchor, multiplier: (article.imageHeightToWidthRatio() ?? 0.0)).isActive = true
         
         sizeToFit()
     }
     
     private static func titleFont() -> UIFont {
         return UIFont.systemFont(ofSize: ArticleTableViewCell.titleFontSize)
-    }
-    
-    private static func articleHasValidTitle(article: ArticleEntity) -> Bool {
-        return (article.title != nil) && (article.title!.count > 0)
-    }
-    
-    private static func imageURLIsValid(article: ArticleEntity) -> Bool {
-        return (article.imageURL != nil) && (article.imageURL!.count > 0)
-    }
-    
-    private static func imageHeight(article: ArticleEntity, width: CGFloat) -> CGFloat {
-        var retVal: CGFloat = 0.0
-        
-        // TODO: get the correct value from the entity
-        let imageWidthToHeight: CGFloat = 1.5
-        // TODO: Move this whole func into the entity obj itself
-    	let shouldShowImage = ArticleTableViewCell.imageURLIsValid(article: article) && (imageWidthToHeight > 0.0)
-        if shouldShowImage {
-            retVal = width / imageWidthToHeight
-        }
-        
-        return retVal
     }
     
 }
