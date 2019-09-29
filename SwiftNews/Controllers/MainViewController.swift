@@ -25,7 +25,7 @@ class MainViewController : BaseViewController, UITableViewDelegate, UITableViewD
         
         articles = [ArticleEntity]()
         
-        tableView = ArticleTableView(frame: CGRect.zero)
+        tableView = ArticleTableView(frame: CGRect.zero, style: .plain)
         tableView.register(ArticleTableViewCell.self, forCellReuseIdentifier: articleCellsIdentifier)
         tableView.delegate = self
         tableView.dataSource = self
@@ -53,7 +53,8 @@ class MainViewController : BaseViewController, UITableViewDelegate, UITableViewD
     	// TODO
     }
     
-    // MARK: ArticleTableView's delegate
+    // MARK: ArticleTableView's UITableViewDataSource
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articles.count
     }
@@ -64,7 +65,7 @@ class MainViewController : BaseViewController, UITableViewDelegate, UITableViewD
         let rawCell = tableView.dequeueReusableCell(withIdentifier: articleCellsIdentifier)
         
         if let typedCell = rawCell as? ArticleTableViewCell {
-            typedCell.updateWithArticle(article: articles[indexPath.startIndex])
+            typedCell.updateWithArticle(article: articles[indexPath.row])
             retVal = typedCell
         } else {
             retVal = ArticleTableViewCell()
@@ -73,6 +74,16 @@ class MainViewController : BaseViewController, UITableViewDelegate, UITableViewD
         assert(rawCell != nil, "Something went wrong trying to recover a reusable article cell!")
         
         return retVal!
+    }
+    
+    // MARK: ArticleTableView's UITableViewDelegate
+	
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return ArticleTableViewCell.estimatedHeight(tableView: tableView, article: articles[indexPath.row])
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
     }
 
 }
