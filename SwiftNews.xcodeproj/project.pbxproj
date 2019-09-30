@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09041B6323417B1B003CBCF1 /* PersistentStoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09041B6223417B1B003CBCF1 /* PersistentStoreManager.swift */; };
 		0995B896234115C100B51693 /* BaseEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0995B895234115C100B51693 /* BaseEntity.swift */; };
 		0995B898234115EA00B51693 /* ArticleEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0995B897234115EA00B51693 /* ArticleEntity.swift */; };
 		0995B89A23411AE500B51693 /* NewsEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0995B89923411AE500B51693 /* NewsEntity.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		09041B6223417B1B003CBCF1 /* PersistentStoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentStoreManager.swift; sourceTree = "<group>"; };
 		0995B895234115C100B51693 /* BaseEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseEntity.swift; sourceTree = "<group>"; };
 		0995B897234115EA00B51693 /* ArticleEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleEntity.swift; sourceTree = "<group>"; };
 		0995B89923411AE500B51693 /* NewsEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsEntity.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				0995B895234115C100B51693 /* BaseEntity.swift */,
 				0995B897234115EA00B51693 /* ArticleEntity.swift */,
 				0995B89923411AE500B51693 /* NewsEntity.swift */,
+				09041B6223417B1B003CBCF1 /* PersistentStoreManager.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 				09B49D0E233FD339008DA551 /* NewsTableView.swift in Sources */,
 				0995B89A23411AE500B51693 /* NewsEntity.swift in Sources */,
 				0995B89C234134A300B51693 /* ArticleNavController.swift in Sources */,
+				09041B6323417B1B003CBCF1 /* PersistentStoreManager.swift in Sources */,
 				09B49D13234067E5008DA551 /* Extensions.swift in Sources */,
 				09B49D08233FB9D8008DA551 /* MainNavController.swift in Sources */,
 				09E7C886233FB380004B9CCD /* BaseViewController.swift in Sources */,

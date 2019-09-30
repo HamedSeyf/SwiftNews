@@ -16,7 +16,7 @@ class MainViewController : BaseViewController, UITableViewDelegate, UITableViewD
     private static let titleString = "Swift News"
     private static let loadingNewsCaption = "Loading News"
     private static let loadingArticleCaption = "Loading Article"
-    private static let reloadNewsCaption = "Reload"
+    private static let reloadNewsCaption = "Refresh"
     
     private var tableView: NewsTableView!
     private var articles: [ArticleEntity]!
@@ -81,9 +81,11 @@ class MainViewController : BaseViewController, UITableViewDelegate, UITableViewD
                     if error == nil {
                         self?.updateWithArticles(newArticles: newsEntity?.articles)
                     } else {
-                        self?.showAlert(title: "Oooops!", message: "Something went wrong trying to load the news.\nPlease try again later.", options: ["Ok", "Retry"], dismissCallback: { (userPrompt: Int) in
+                        self?.showAlert(title: "Oooops!", message: "Something went wrong trying to load the news.\nShow the already saved articles?", options: ["No", "Saved articles"], dismissCallback: { (userPrompt: Int) in
                             if userPrompt == 1 {
-                                self?.softRefreshNews()
+                                let savedArticles = PersistentStoreManager.sharedInstance?.loadEntities(type: ArticleEntity.self) as? [ArticleEntity]
+                                
+                                self?.updateWithArticles(newArticles: savedArticles)
                             }
                         })
                     }

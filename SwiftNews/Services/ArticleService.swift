@@ -33,6 +33,11 @@ class ArticleService: BaseService {
                     let newsResponse = response.result.value,
                     let newsEntity = Mapper<NewsEntity>().map(JSONObject: newsResponse),
                     successStatusCodes.contains(status) {
+                    
+                    if let articles = newsEntity.articles {
+                    	PersistentStoreManager.sharedInstance?.saveEntities(articles)
+                    }
+                    
                     completionHandler(weakService, newsEntity, nil)
                 } else {
                     let error = response.result.error ?? NSError(domain:errorDomain, code:response.response?.statusCode ?? defaultErrorCode, userInfo: nil)

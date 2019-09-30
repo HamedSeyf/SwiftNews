@@ -19,6 +19,10 @@ class ArticleEntity : BaseEntity {
     @objc dynamic var imageHeight: NSNumber = 0.0
     @objc dynamic var htmlBody: String?
     
+    override class func primaryKey() -> String? {
+        return "title"
+    }
+    
     override func mapping(map: Map) {
         super.mapping(map: map)
         
