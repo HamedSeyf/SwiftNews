@@ -14,10 +14,10 @@ class NewsTableViewCell : UITableViewCell {
     private var titleLabel: UILabel!
     private var articleImageView: UIImageView!
     
-    private static let sideMargins: CGFloat		= 10.0
+    private static let sideMargins: CGFloat		= 12.0
     private static let verticalMargins: CGFloat	= 10.0
     private static let verticalGap: CGFloat		= 10.0
-    private static let titleFontSize: CGFloat	= 12.0
+    private static let titleFontSize: CGFloat	= 14.0
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -32,6 +32,7 @@ class NewsTableViewCell : UITableViewCell {
         addSubview(titleLabel)
         
         articleImageView = UIImageView()
+        articleImageView.backgroundColor = UIColor.gray
         addSubview(articleImageView)
     }
     
