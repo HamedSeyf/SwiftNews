@@ -12,7 +12,7 @@ import UIKit
 class ArticleViewController : BaseViewController {
     
     private(set) var article: ArticleEntity?
-    private var articleView: ArticleView!
+    private var articleView: ArticleView?
     
     required init(articleObject: ArticleEntity) {
         super.init(nibName: nil, bundle: nil)
@@ -20,7 +20,6 @@ class ArticleViewController : BaseViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(dismissPressed))
         navigationItem.title = articleObject.title
         
-        articleView = ArticleView()
         article = articleObject
     }
     
@@ -32,17 +31,23 @@ class ArticleViewController : BaseViewController {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.white
-     	
-        view.addSubview(articleView)
-        articleView.translatesAutoresizingMaskIntoConstraints = false
-        articleView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        articleView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
-        articleView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        articleView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
-        if let htmlBody = article?.htmlBody {
-            articleView.loadHTMLString(htmlBody, baseURL: nil)
+        if let validArticle = article {
+        	articleView = ArticleView(frame: CGRect.zero, articleObject: validArticle)
+     		
+        	view.addSubview(articleView!)
         }
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        articleView?.frame = CGRect(
+            x: 0.0,
+            y: navigationBarTotalHeight,
+            width: view.frame.width,
+            height: view.frame.height - navigationBarTotalHeight
+        )
     }
     
     @objc private func dismissPressed() {

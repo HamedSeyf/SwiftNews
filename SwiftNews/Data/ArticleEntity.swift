@@ -39,6 +39,10 @@ class ArticleEntity : BaseEntity {
         return (title != nil) && (title!.count > 0)
     }
     
+    func hasValidArticleBody() -> Bool {
+        return (htmlBody != nil) && (htmlBody!.count > 0)
+    }
+    
     func imageURL() -> URL? {
         var retVal: URL? = nil
         

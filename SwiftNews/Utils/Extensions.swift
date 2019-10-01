@@ -25,3 +25,12 @@ extension String {
         return ceil(boundingBox.width)
     }
 }
+
+// https://stackoverflow.com/questions/30503254/get-frame-height-without-navigation-bar-height-and-tab-bar-height-in-deeper-view/37142755
+extension UIViewController {
+    
+    var navigationBarTotalHeight: CGFloat {
+        let height = UIApplication.shared.statusBarFrame.height + (navigationController?.navigationBar.frame.height ?? 0.0)
+        return height
+    }
+}
