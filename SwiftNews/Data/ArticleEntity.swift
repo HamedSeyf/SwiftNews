@@ -35,7 +35,7 @@ class ArticleEntity : BaseEntity {
     }
     
     // MARK: Helper functions
-    
+
     func hasValidTitle() -> Bool {
         return (title != nil) && (title!.count > 0)
     }

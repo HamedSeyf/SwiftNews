@@ -24,7 +24,6 @@ class ArticleView : UIView, WKNavigationDelegate {
     private var imageView: UIImageView?
     private var article: ArticleEntity!
     private var progressBar: MBProgressHUD?
-    private var webViewContentHeight: CGFloat?
     
     init(frame: CGRect, articleObject: ArticleEntity) {
         super.init(frame: frame)
@@ -72,8 +71,6 @@ class ArticleView : UIView, WKNavigationDelegate {
             y: webViewTop,
             width: netWidth,
             height: scrollView.frame.height - webViewTop)
-        
-        updateScrollViewsContentSize()
     }
     
     private func initWebViewAndSpinner() {
@@ -92,33 +89,31 @@ class ArticleView : UIView, WKNavigationDelegate {
             preference.javaScriptEnabled = true
             preference.javaScriptCanOpenWindowsAutomatically = false
             webViewConfiguration.preferences = preference
+            webViewConfiguration.userContentController = userContentController()
             
             webView = WKWebView(frame: CGRect.zero, configuration: webViewConfiguration)
-            webView?.allowsBackForwardNavigationGestures = false
+            webView?.allowsBackForwardNavigationGestures = true
             webView?.navigationDelegate = self
             scrollView.addSubview(webView!)
 			webView!.loadHTMLString(htmlBody, baseURL: nil)
         }
     }
     
-    private func getWebViewTopPosition() -> CGFloat {
-    	return (imageView != nil) ? (imageView!.frame.maxY + ArticleView.verticalGap) : ArticleView.verticalMargins
+    private func userContentController() -> WKUserContentController {
+        let controller = WKUserContentController()
+        controller.addUserScript(WKUserContentController.viewPortScript())
+        return controller
     }
     
-    private func updateScrollViewsContentSize() {
-        let scrollViewContentHeight = getWebViewTopPosition() + (webViewContentHeight ?? 0.0)
-        scrollView.contentSize = CGSize(width: scrollView.frame.width, height: scrollViewContentHeight)
+    private func getWebViewTopPosition() -> CGFloat {
+    	return (imageView != nil) ? (imageView!.frame.maxY + ArticleView.verticalGap) : 0.0
     }
     
     // MARK: WKNavigationDelegate
+    
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         if webView === self.webView {
         	progressBar?.hide(animated: true)
-        	
-            webView.evaluateJavaScript("document.documentElement.scrollHeight", completionHandler: { [weak self] (height, error) in
-                self?.webViewContentHeight = height as? CGFloat
-                self?.updateScrollViewsContentSize()
-            })
         }
     }
     

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WebKit
 
 extension String {
 
@@ -58,5 +59,24 @@ extension UIViewController {
     var navigationBarTotalHeight: CGFloat {
         let height = UIApplication.shared.statusBarFrame.height + (navigationController?.navigationBar.frame.height ?? 0.0)
         return height
+    }
+}
+
+
+extension WKUserContentController {
+    
+    // https://gist.github.com/pkuecuekyan/f70096218a6b969e0249427a7d324f91
+    static func viewPortScript() -> WKUserScript {
+        let viewPortScript = """
+        var meta = document.createElement('meta');
+        meta.setAttribute('name', 'viewport');
+        meta.setAttribute('content', 'width=device-width');
+        meta.setAttribute('initial-scale', '1.0');
+        meta.setAttribute('maximum-scale', '1.0');
+        meta.setAttribute('minimum-scale', '1.0');
+        meta.setAttribute('user-scalable', 'no');
+        document.getElementsByTagName('head')[0].appendChild(meta);
+    """
+        return WKUserScript(source: viewPortScript, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
     }
 }
