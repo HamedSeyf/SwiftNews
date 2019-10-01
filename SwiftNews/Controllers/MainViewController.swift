@@ -58,9 +58,11 @@ class MainViewController : BaseViewController, UITableViewDelegate, UITableViewD
     }
     
     func updateWithArticles(newArticles: [ArticleEntity]?) {
-        articles = newArticles ?? [ArticleEntity]()
-        newsUpdateTime = Date()
-        tableView.reloadData()
+        DispatchQueue.main.async { [weak self] in
+            self?.articles = newArticles ?? [ArticleEntity]()
+            self?.newsUpdateTime = Date()
+            self?.tableView.reloadData()
+        }
     }
     
     private func hardRefreshNews() {
