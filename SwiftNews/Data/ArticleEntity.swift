@@ -31,6 +31,7 @@ class ArticleEntity : BaseEntity {
         imageWidth <- map["data.thumbnail_width"]
         imageHeight <- map["data.thumbnail_height"]
         htmlBody <- map["data.selftext_html"]
+        htmlBody = htmlBody?.decodedHTML(wrapInBody: true)
     }
     
     // MARK: Helper functions

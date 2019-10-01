@@ -8,9 +8,9 @@
 
 import UIKit
 
-// https://stackoverflow.com/questions/30450434/figure-out-size-of-uilabel-based-on-string-in-swift
 extension String {
-    
+
+    // https://stackoverflow.com/questions/30450434/figure-out-size-of-uilabel-based-on-string-in-swift
     func height(withConstrainedWidth width: CGFloat, font: UIFont) -> CGFloat {
         let constraintRect = CGSize(width: width, height: .greatestFiniteMagnitude)
         let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [.font : font], context: nil)
@@ -23,6 +23,32 @@ extension String {
         let boundingBox = self.boundingRect(with: constraintRect, options: .usesLineFragmentOrigin, attributes: [.font : font], context: nil)
         
         return ceil(boundingBox.width)
+    }
+    
+    // https://stackoverflow.com/questions/25607247/how-do-i-decode-html-entities-in-swift
+    func decodedHTML(wrapInBody: Bool) -> String? {
+        guard let data = data(using: .utf8) else {
+            return nil
+        }
+        
+        let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
+            .documentType: NSAttributedString.DocumentType.html,
+            .characterEncoding: String.Encoding.utf8.rawValue
+        ]
+        
+        guard let attributedString = try? NSAttributedString(data: data, options: options, documentAttributes: nil) else {
+            return nil
+        }
+        
+        if wrapInBody {
+            return """
+<html><body><h1>
+""" + attributedString.string + """
+                </body></html>
+                """
+        } else {
+            return attributedString.string
+        }
     }
 }
 
