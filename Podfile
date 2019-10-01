@@ -7,8 +7,6 @@ target 'SwiftNews' do
 
   pod 'Alamofire', '~> 4.7'
 
-  pod 'SwiftyJSON', '~> 4.0'
-
   pod 'AlamofireObjectMapper', '~> 5.2'
 
   pod 'PINRemoteImage', '~> 3.0.0-beta'
