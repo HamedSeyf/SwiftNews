@@ -15,18 +15,25 @@ class ArticleService: BaseService {
     
     private static let newsURL = "https://www.reddit.com/r/swift/.json"
     private static let successStatusCodes = [200]
-    private static let requestTimeOutInterval: TimeInterval = 10
+    private static let timeOutInterval: TimeInterval = 10 // Seconds
     
     private var dataRequest: DataRequest?
+    private var manager: SessionManager?
+    
+    override init() {
+        super.init()
+        
+        let configuration = URLSessionConfiguration.default
+        configuration.timeoutIntervalForResource = ArticleService.timeOutInterval
+        configuration.timeoutIntervalForRequest = ArticleService.timeOutInterval
+        manager = Alamofire.SessionManager(configuration: configuration)
+    }
     
     static func fetchNews(completionHandler: @escaping (ArticleService?, NewsEntity?, Error?) -> Void) -> ArticleService {
         let service = ArticleService()
         weak var weakService = service
         
-        let manager = Alamofire.SessionManager.default
-        manager.session.configuration.timeoutIntervalForRequest = requestTimeOutInterval
-        
-        service.dataRequest = manager.request(newsURL, method: .get, parameters: nil, encoding: JSONEncoding.default)
+        service.dataRequest = service.manager?.request(newsURL, method: .get, parameters: nil, encoding: JSONEncoding.default)
             .responseJSON { response in
                 
                 if let status = response.response?.statusCode,
